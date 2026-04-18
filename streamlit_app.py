@@ -25,14 +25,14 @@ def load_model_and_scaler():
         import pickle
         
         # Load model
-        model = load_model('hand_gesture_model.h5')
+        model = load_model('models/hand_gesture_model.h5')
         
         # Load the fitted scaler
-        with open('scaler.pkl', 'rb') as f:
+        with open('models/scaler.pkl', 'rb') as f:
             scaler = pickle.load(f)
         
         # Load label encoder
-        with open('label_encoder.pkl', 'rb') as f:
+        with open('models/label_encoder.pkl', 'rb') as f:
             label_encoder = pickle.load(f)
         
         return model, scaler, label_encoder
