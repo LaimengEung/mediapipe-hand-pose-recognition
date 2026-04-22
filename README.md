@@ -30,29 +30,29 @@ This project implements a complete pipeline for gesture recognition that:
 
 ### Model 1: Random Forest ⭐ FASTEST
 - **Architecture**: 100 trees, max_depth=15
-- **Test Accuracy**: ~99.58%
-- **Training Time**: ~0.01s 🚀
+- **Test Accuracy**: ~99.512%
+- **Training Time**: ~0-2s 🚀
 - **Pros**: Lightning-fast, interpretable, no overfitting
 - **Cons**: Less flexible than neural networks
 
 ### Model 2: XGBoost ⭐ FASTEST
 - **Architecture**: 100 estimators, max_depth=7, learning_rate=0.1
-- **Test Accuracy**: ~99.41%
-- **Training Time**: ~0.02s 🚀
-- **Pros**: Extremely fast, gradient boosted trees are powerful
+- **Test Accuracy**: ~98.75%
+- **Training Time**: ~2-7s 🚀
+- **Pros**: fast, gradient boosted trees are powerful
 - **Cons**: More complex hyperparameter tuning
 
-### Model 3: Simple DNN ⭐ DEPLOYMENT CHOICE
+### Model 3: Simple MLP ⭐ DEPLOYMENT CHOICE
 - **Architecture**: Input(63) → Dense(128, relu) → Dropout(0.3) → Dense(7, softmax)
-- **Test Accuracy**: 99.74% 🏆
-- **Training Time**: ~2-3 seconds
+- **Test Accuracy**: 99.56% 🏆
+- **Training Time**: ~20-30 seconds
 - **Pros**: Excellent accuracy, balanced speed/performance
 - **Cons**: Slower than ensemble methods
 
-### Model 4: Deeper DNN
+### Model 4: Deeper MLP
 - **Architecture**: Input(63) → Dense(128, relu) → Dropout(0.3) → Dense(64, relu) → Dropout(0.2) → Dense(32, relu) → Dropout(0.2) → Dense(7, softmax)
-- **Test Accuracy**: ~99.67%
-- **Training Time**: ~3-4 seconds
+- **Test Accuracy**: ~99.41%
+- **Training Time**: ~30-40 seconds
 - **Pros**: Still highly accurate
 - **Cons**: No significant improvement over Simple DNN, longer training
 
@@ -60,10 +60,10 @@ This project implements a complete pipeline for gesture recognition that:
 
 | Model | Accuracy | Training Time | Speed Rank | Recommendation |
 |-------|----------|---------------|-----------|-----------------|
-| Simple DNN | **99.74%** | 2-3s | 3rd | ✅ **Selected** |
-| Deeper DNN | 99.67% | 3-4s | 4th | Not needed |
-| Random Forest | 99.58% | 0.01s | 1st | Great alternative |
-| XGBoost | 99.41% | 0.02s | 2nd | Great alternative |
+| Simple MLP | **99.56%** | 20-30s | 3rd | ✅ **Selected** |
+| Deeper MLP | 99.41% | 30-40s | 4th | Not needed |
+| Random Forest | 99.12% | 0-2s | 1st | Great alternative |
+| XGBoost | 98.75% | 2-7s | 2nd | Great alternative |
 
 ### **Key Insight**: Feature Quality > Model Complexity
 All models achieve 99%+ accuracy because **MediaPipe hand landmarks provide exceptional feature quality**. The extracted 21 joints (63 coordinates) contain rich gesture information, making even simple models highly effective.
@@ -77,7 +77,7 @@ mediapipe-final-project/
 ├── gesture_keyboard.py            # Real-time gesture → keyboard/mouse control
 ├── hand_landmarker.task           # Pre-trained MediaPipe hand detection model
 ├── models/
-│   ├── hand_gesture_model.h5      # Saved Simple DNN model
+│   ├── hand_gesture_model.h5      # Saved Simple MLP model
 │   ├── scaler.pkl                 # Fitted StandardScaler
 │   └── label_encoder.pkl          # Gesture label encoder
 ├── mediapipe-hand-gesture/        # Original hand gesture repo
@@ -107,6 +107,8 @@ pip install keyboard pynput pyautogui
 # Open training_model.ipynb in Jupyter
 # Run all cells to train and compare models
 # Models will be saved to ./models/
+
+> OR use the pre-trained models in ./models/
 ```
 
 **2. Web Interface (Streamlit)**
@@ -153,8 +155,8 @@ python gesture_keyboard.py
 ### Section 4: Model Training & Comparison
 - **Model 1**: Train Random Forest
 - **Model 2**: Train XGBoost
-- **Model 3**: Train Simple DNN (1 hidden layer)
-- **Model 4**: Train Deeper DNN (3 hidden layers)
+- **Model 3**: Train Simple MLP (1 hidden layer)
+- **Model 4**: Train Deeper MLP (3 hidden layers)
 
 ### Section 5: Model Comparison & Analysis
 - Summary accuracy table
@@ -162,25 +164,7 @@ python gesture_keyboard.py
 - Visualization charts (accuracy vs time)
 - Classification reports for best model
 
-## 🎯 Results Summary
-
-```
-Random Forest       | 99.58% accuracy | 0.01s   🚀
-XGBoost             | 99.41% accuracy | 0.02s   🚀
-Simple DNN ✅       | 99.74% accuracy | 2-3s    🏆 SELECTED
-Deeper DNN          | 99.67% accuracy | 3-4s
-```
-
-**Why Simple DNN?**
-- ✅ Highest accuracy (99.74%)
-- ✅ Good balance of speed & performance
-- ✅ Easy to save, load, and deploy
-- ✅ Reliable for production use
-- ✅ Ideal for real-time applications
-
-## 🔧 Model Architecture Details
-
-### Simple DNN (Selected)
+### Selected: Simple MLP 
 ```
 Input Layer:       63 features (hand landmarks)
                    ↓
@@ -224,10 +208,10 @@ Training Config:
 - For real-time use: Neural networks acceptable at 10-15 FPS
 
 **3. Production Considerations**
-- **Simple DNN**: Best overall choice (accuracy + inference speed)
+- **Simple MLP**: Best overall choice (accuracy + inference speed)
 - **Random Forest**: Best for deployment (fastest inference)
 - **XGBoost**: Good alternative (fast + interpretable)
-- **Deeper DNN**: Not needed (minimal accuracy gain, slower)
+- **Deeper MLP**: Not needed (minimal accuracy gain, slower)
 
 ## 🎮 Applications
 
