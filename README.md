@@ -80,12 +80,13 @@ mediapipe-final-project/
 │   ├── hand_gesture_model.h5      # Saved Simple MLP model
 │   ├── scaler.pkl                 # Fitted StandardScaler
 │   └── label_encoder.pkl          # Gesture label encoder
-├── mediapipe-hand-gesture/        # Original hand gesture repo
-│   ├── app.py
-│   ├── model/
-│   └── utils/
+├── results/                       # Auto-saved visualization outputs
+├── data_collection/               # Data collection & preprocessing utilities
+│   ├── collect_data.py            # Collect gesture samples from webcam
+│   ├── clean_and_merge.py         # Clean and merge collected datasets
+│   └── final_dataset.csv          # Processed dataset ready for training
 ├── dataset/
-│   └── merged_dataset_cleaned.csv          # Combined training data
+│   └── merged_dataset_cleaned.csv # Combined training data
 └── README.md                      # This file
 ```
 
