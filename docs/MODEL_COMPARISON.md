@@ -8,14 +8,14 @@ All 4 models achieved **99%+ accuracy**. Key insight: **feature quality matters 
 
 | Model | Accuracy | Training Time | Why |
 |-------|----------|---|---|
-| Random Forest | 99.58% | 0.01s ⚡ | Fast ensemble |
-| XGBoost | 99.41% | 0.02s ⚡ | Fastest boosting |
-| **Simple DNN** | **99.74%** 🏆 | 2-3s | **SELECTED** |
-| Deeper DNN | 99.67% | 3-4s | No real improvement |
+| Random Forest | 99.12% | 0-2s ⚡ | Fast ensemble |
+| XGBoost | 98.75% | 2-7s ⚡ | Fastest boosting |
+| **Simple MLP** | **99.756** 🏆 | 20-30s | **SELECTED** |
+| Deeper MLP | 99.41% | 30-40s | No real improvement |
 
 ## 🤖 Model Details
 
-### Simple DNN (SELECTED) ⭐
+### Simple MLP (SELECTED) ⭐
 ```
 Input (63) → Dense(128, relu) → Dropout(0.3) → Dense(7, softmax)
 ```
@@ -23,11 +23,8 @@ Input (63) → Dense(128, relu) → Dropout(0.3) → Dense(7, softmax)
 - **Why:** Best balance of accuracy, speed, and simplicity
 - **Deployment:** Easy - single .h5 file + scaler
 
-### Why Not Deeper DNN?
-- Only 0.07% accuracy improvement
-- 50% slower training
-- Risk of overfitting
-- **Verdict:** Not worth it
+### Why Not Deeper MLP?
+- Surprisngly, it performs worse than Simple MLP of just 1 hidden layer.
 
 ### Why Not Ensemble Methods?
 - Slightly lower accuracy (99.41-99.58%)
@@ -39,11 +36,11 @@ Input (63) → Dense(128, relu) → Dropout(0.3) → Dense(7, softmax)
 1. **MediaPipe features are rich** → 63 hand landmark features capture gesture perfectly
 2. **Simple > Complex** → More layers = no benefit here
 3. **All 99%+** → Feature quality matters more than model architecture
-4. **Sweet spot** → Simple DNN has best accuracy-to-complexity ratio
+4. **Sweet spot** → Simple MLP has best accuracy-to-complexity ratio
 
 ## ✅ Production Recommendation
 
-**Use Simple DNN** for:
+**Use Simple MLP** for:
 - ✅ Highest accuracy (99.74%)
 - ✅ Fast training (2-3s)
 - ✅ Real-time inference (10+ FPS)
