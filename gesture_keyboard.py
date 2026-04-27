@@ -1,8 +1,3 @@
-"""
-Gesture to Keyboard Mapper
-Map hand gestures to keyboard inputs for controlling games, websites, etc.
-"""
-
 import cv2
 import numpy as np
 import mediapipe as mp
@@ -22,13 +17,13 @@ mouse = MouseController()
 # Gesture to Key Mapping (customize as needed)
 # Use 'click' for lefst click, 'rclick' for right click, None to do nothing
 GESTURE_TO_KEY = {
-    'fist': 'w',           # Forward/Jump
-    'index_finger': 'a',   # Left
-    'peace': 'd',          # Right
-    'thumb_up': 'rclick',  # Right click
-    'open_palm': ' ',      # Space
-    'ok': 'click',         # LEFT CLICK
-    'unrecognized': None   # Do nothing
+    'fist': 'w',           
+    'index_finger': 'a',   
+    'peace': 'd',          
+    'thumb_up': 'rclick',   
+    'open_palm': ' ',      
+    'ok': 'click',          
+    'unrecognized': None    
 }
 
 class GestureKeyboardMapper:
